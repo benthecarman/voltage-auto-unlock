@@ -1,0 +1,83 @@
+# For full config options, check the docs:
+#    docs.serverless.com
+
+service: voltage-auto-unlock
+frameworkVersion: "2"
+
+useDotenv: true
+
+# you can add packaging information here
+# Make sure to run "sbt assembly" to create a jar file
+# with all your dependencies and put that jar file name here.
+package:
+  artifact: target/scala-2.13/voltage-auto-unlock-assembly-1.0.0.jar
+  individually: true
+  exclude:
+    - node_modules/**
+    - venv/**
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-deployment-bucket
+  - serverless-iam-roles-per-function
+  - serverless-plugin-common-excludes
+  - serverless-plugin-split-stacks
+provider:
+  name: aws
+  runtime: java11
+  versionFunctions: false
+  lambdaHashingVersion: 20201221
+  region: ${env:APP_REGION}
+  stage: ${env:APP_STAGE}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - ec2:DescribeSecurityGroups
+        - ec2:DescribeSubnets
+        - ec2:DescribeNetworkInterfaces
+        - ec2:CreateNetworkInterface
+        - ec2:DeleteNetworkInterface
+        - ec2:DescribeInstances
+        - ec2:AttachNetworkInterface
+        - secretsmanager:GetResourcePolicy
+        - secretsmanager:GetSecretValue
+        - secretsmanager:DescribeSecret
+        - secretsmanager:ListSecretVersionIds
+        - secretsmanager:ListSecrets
+        - lambda:InvokeFunction
+      Resource: "*"
+
+  deploymentBucket:
+    name: ${env:APP_DEPLOYMENT_BUCKET}
+    serverSideEncryption: AES256
+  # VPC Access Execution Role
+
+custom:
+  dotenv:
+    required:
+      env:
+        - APP_STAGE
+        - APP_VERSION
+        - APP_REGION
+        - APP_DEPLOYMENT_BUCKET
+
+  stage: ${self:provider.stage}
+
+  deploymentBucket:
+    accelerate: true
+    blockPublicAccess: true
+    tags:
+      - Key: Environment
+        Value: ${self:provider.stage}
+
+functions:
+  voltage:
+    name: voltage
+    handler: cloud.voltage.ServerlessHandler
+    memorySize: 10240
+    timeout: 30
+    events:
+      - http:
+          path: /voltage
+          method: post
+          cors: true
