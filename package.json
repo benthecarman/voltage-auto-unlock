@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "serverless": "^2.72.2",
+    "slspress": "^2.2.5"
+  },
+  "devDependencies": {
+    "serverless-deployment-bucket": "^1.5.1",
+    "serverless-domain-manager": "^6.1.0",
+    "serverless-dotenv-plugin": "^3.10.0",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-offline": "^8.3.1",
+    "serverless-plugin-common-excludes": "^4.0.0",
+    "serverless-plugin-split-stacks": "^1.11.3",
+    "serverless-plugin-warmup": "^6.2.0",
+    "serverless-vpc-plugin": "^1.0.4"
+  }
+}
