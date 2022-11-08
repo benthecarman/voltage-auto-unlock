@@ -74,7 +74,7 @@ functions:
   voltage:
     name: voltage
     handler: cloud.voltage.ServerlessHandler
-    memorySize: 10240
+    memorySize: 3008
     timeout: 30
     events:
       - http:
