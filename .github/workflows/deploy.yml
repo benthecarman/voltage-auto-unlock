@@ -19,7 +19,7 @@ jobs:
             ~/.sbt
           key: ${{ runner.os }}-cache
       - name: Build JAR
-        run: sbt slsController/assembly
+        run: sbt assembly
       - uses: actions/setup-node@v1
         with:
           node-version: '16.x'
