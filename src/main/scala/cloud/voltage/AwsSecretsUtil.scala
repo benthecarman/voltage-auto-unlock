@@ -18,7 +18,6 @@ trait AwsSecretsUtil extends Logging {
   private case class LndSecretResult(
       LND_RPC_URI: String,
       LND_MACAROON: String,
-      LND_CERTIFICATE: String,
       VOLTAGE_SECRET: String,
       VOLTAGE_API: String,
       LND_PASSWORD: String)
