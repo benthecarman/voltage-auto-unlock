@@ -99,7 +99,6 @@ website/static/api
 *.env*
 *data.json
 *.zip
-node_modules
 
 # Exception
 !.env.example
