@@ -1,9 +1,9 @@
 ThisBuild / version := "1.0.0"
 
-ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / scalaVersion := "2.13.10"
 
-val bitcoinsV = "1.9.3-17-018a6e58-SNAPSHOT"
-val awsSdkV = "1.12.296"
+val bitcoinsV = "1.9.6"
+val awsSdkV = "1.12.332"
 val awsLambdaCoreV = "1.2.1"
 val awsRuntimeV = "2.1.1"
 
