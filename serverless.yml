@@ -10,7 +10,7 @@ useDotenv: true
 # Make sure to run "sbt assembly" to create a jar file
 # with all your dependencies and put that jar file name here.
 package:
-  artifact: target/scala-2.13/voltage-auto-unlock-assembly-1.0.0.jar
+  artifact: target/scala-2.13/voltage-auto-unlock-assembly-0.1.0.jar
   individually: true
   exclude:
     - node_modules/**
