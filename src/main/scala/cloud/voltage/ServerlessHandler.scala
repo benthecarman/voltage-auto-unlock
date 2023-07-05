@@ -62,11 +62,13 @@ class ServerlessHandler
 
       (path, method) match {
         case ("/voltage", POST) =>
-          val secretHeader =
-            headers.getOrElse("Voltage_secret",
-                              headers.getOrElse("VOLTAGE_SECRET",
-                                                throw new RuntimeException(
-                                                  "No Voltage_secret header")))
+          val secretHeader = headers
+            .getOrElse("Voltage-Secret",
+                       headers.getOrElse(
+                         "Voltage_secret",
+                         headers.getOrElse("VOLTAGE_SECRET",
+                                           throw new BadRequest400Exception(
+                                             "No Voltage_secret header"))))
 
           if (!secretHeader.trim.equalsIgnoreCase(voltageSecret.secret))
             throw new RuntimeException(s"Invalid voltage secret")
