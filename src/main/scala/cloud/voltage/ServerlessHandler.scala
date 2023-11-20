@@ -67,7 +67,7 @@ class ServerlessHandler
                        headers.getOrElse(
                          "Voltage_secret",
                          headers.getOrElse("VOLTAGE_SECRET",
-                                           throw new BadRequest400Exception(
+                                           throw new RuntimeException(
                                              "No Voltage_secret header"))))
 
           if (!secretHeader.trim.equalsIgnoreCase(voltageSecret.secret))
